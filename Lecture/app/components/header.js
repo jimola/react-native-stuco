@@ -1,10 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 
 export default class Header extends React.Component {
+
+  refreshPressed(){
+
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -30,8 +35,8 @@ const styles = StyleSheet.create({
     flex:1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 8,
+    justifyContent:'space-between',
+    paddingHorizontal:8,
     paddingTop:15
   },
   title:{
