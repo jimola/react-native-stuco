@@ -12,24 +12,7 @@ export default class MyList extends React.Component {
   }
 
   componentWillMount(){
-    this.setState({list:[
-      {
-        title: 'Appointments',
-        icon: 'av-timer'
-        },
-        {
-        title: 'Trips',
-        icon: 'flight-takeoff'
-      }
-    ]
 
-    })
-  }
-
-  deleteItem(i){
-    var newList = this.state.list
-    newList.splice(i,1)
-    this.setState({list:newList})
   }
 
   render() {
@@ -37,20 +20,20 @@ export default class MyList extends React.Component {
       <View style={styles.container}>
         <List style={styles.list}>
           {
-            this.state.list.map((item, i) => (
+            this.props.list.map((item, i) => (
               <ListItem
-                title={item.title}
+                title={item.name}
+                subtitle={item.job}
+                rightTitle={`Age: ${item.age}`}
                 leftIcon={{name:item.icon}}
                 rightIcon={{name:'delete'}}
-                onPressRightIcon={() => this.deleteItem(i)}
+                onPressRightIcon={() => this.props.deleteItem(i)}
                 key={i}
               />
             ))
           }
         </List>
-        <TouchableOpacity>
-          <Icon name='refresh' size={30} color='white'/>
-        </TouchableOpacity>
+
       </View>
     );
   }
