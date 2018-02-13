@@ -1,62 +1,37 @@
 import React from 'react';
 import { StyleSheet, Text, View, StatusBar, TouchableOpacity, ScrollView } from 'react-native';
+import { StackNavigator } from 'react-navigation'
 
+import Home from './app/screens/Home';
+import Login from './app/screens/Login';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Header from './app/components/header';
 import MyList from './app/components/list';
 
 export default class App extends React.Component {
 
-  state={
-    list:[]
-  }
-
-  componentWillMount(){
-    this.fetchData()
-  }
-
-  fetchData(){
-    return fetch('https://api.myjson.com/bins/qwwrt')
-    .then((response) => response.json())
-    .then((responseJson) => {
-      this.setState({list: responseJson.list})
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-
-  }
-
-  deleteItem(i){
-    var newList = this.state.list
-    newList.splice(i,1)
-    this.setState({list:newList})
-  }
-
   render() {
     return (
-      <View style={styles.container}>
-
-        <Header/>
-        <View style={styles.body}>
-          <ScrollView style={styles.scroll}>
-            <MyList list={this.state.list}
-              deleteItem={(i)=>this.deleteItem(i)}
-              refreshList={()=>this.fetchData()}
-            />
-          </ScrollView>
-          <View style={styles.fetchContainer}>
-            <TouchableOpacity
-              style={styles.fetchButton}
-              onPress={() => this.fetchData()}>
-              <Icon name='vertical-align-bottom' size={30} color='white'/>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
+      <AppNavigator/>
     );
   }
 }
+
+const AppNavigator = StackNavigator({
+  Home: {
+    screen: Home,
+  },
+  Login: {
+    screen: Login
+  }
+
+
+  // Order: {
+  //   screen: OrderStack,
+  // },
+}, {
+  headerMode: 'none',
+});
 
 const styles = StyleSheet.create({
   container: {
