@@ -14,11 +14,11 @@ export default class Header extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.horizContainer}>
-          <Icon name='dehaze' size={30} color='white'/>
+          <Icon name='search' size={30} color='white'/>
           <Text style={styles.title}>
             App Title
           </Text>
-          <Icon name='dehaze' size={30} color='white'/>
+          <Icon name='add' size={30} color='white'/>
         </View>
       </View>
     );
