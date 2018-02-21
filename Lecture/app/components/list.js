@@ -27,6 +27,7 @@ export default class MyList extends React.Component {
                 rightTitle={`Age: ${item.age}`}
                 leftIcon={{name:item.icon}}
                 rightIcon={{name:'delete'}}
+                onPress={()=> this.props.goToDetails(item)}
                 onPressRightIcon={() => this.props.deleteItem(i)}
                 key={i}
               />

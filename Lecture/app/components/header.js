@@ -14,9 +14,10 @@ export default class Header extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.horizContainer}>
-          <Icon name='search' size={30} color='white'/>
+          {this.props.title ? <Icon name='arrow-back' size={30} color='white'/> : <Icon name='search' size={30} color='white'/>}
+
           <Text style={styles.title}>
-            App Title
+            {this.props.title ? this.props.title : 'App Title'}
           </Text>
           <Icon name='add' size={30} color='white'/>
         </View>

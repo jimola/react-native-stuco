@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Header from '../components/header';
 import MyList from '../components/list';
 
+
 export default class Home extends React.Component {
 
   state={
@@ -16,7 +17,7 @@ export default class Home extends React.Component {
   }
 
   fetchData(){
-    return fetch('https://api.myjson.com/bins/qwwrt')
+    return fetch('https://api.myjson.com/bins/1crrbd')
     .then((response) => response.json())
     .then((responseJson) => {
       this.setState({list: responseJson.list})
@@ -37,6 +38,12 @@ export default class Home extends React.Component {
     this.props.navigation.navigate('login')
   }
 
+  goToDetails(item){
+    console.log(item);
+    this.props.navigation.navigate('Details', {...item})
+
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -47,6 +54,7 @@ export default class Home extends React.Component {
             <MyList list={this.state.list}
               deleteItem={(i)=>this.deleteItem(i)}
               refreshList={()=>this.fetchData()}
+              goToDetails={(item)=>this.goToDetails(item)}
             />
           </ScrollView>
           <View style={styles.fetchContainer}>
@@ -75,7 +83,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   fetchContainer:{
-    flex:2,
+    // flex:2,
     justifyContent:'center',
     alignItems:'center',
   },
