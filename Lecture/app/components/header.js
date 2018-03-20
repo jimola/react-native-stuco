@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-
+import { NavigationActions } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 
@@ -14,10 +14,22 @@ export default class Header extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.horizContainer}>
-          {this.props.title ? <Icon name='arrow-back' size={30} color='white'/> : <Icon name='search' size={30} color='white'/>}
+          {this.props.title ?
+            <TouchableOpacity
+            onPress={() => this.props.navigation.dispatch(NavigationActions.back())}
+            >
+              <Icon name='arrow-back' size={30} color='white'/>
+            </TouchableOpacity>
+            :
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate('DrawerOpen')}
+            >
+              <Icon name='menu' size={30} color='white'/>
+            </TouchableOpacity>
+          }
 
           <Text style={styles.title}>
-            {this.props.title ? this.props.title : 'App Title'}
+            {this.props.title ? this.props.title : 'Home Title'}
           </Text>
           <Icon name='add' size={30} color='white'/>
         </View>

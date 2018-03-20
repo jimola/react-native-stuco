@@ -15,7 +15,8 @@ export default class Details extends React.Component {
     console.log(person);
     return(
       <View style={styles.container}>
-        <Header title={person.name}/>
+        <Header title={person.name}
+        navigation={this.props.navigation}/>
         <View style={styles.mainContainer}>
           <Image
             style={styles.image}

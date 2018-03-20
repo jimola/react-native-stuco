@@ -48,7 +48,9 @@ export default class Home extends React.Component {
     return (
       <View style={styles.container}>
 
-        <Header/>
+        
+
+        <Header navigation={this.props.navigation}/>
         <View style={styles.body}>
           <ScrollView style={styles.scroll}>
             <MyList list={this.state.list}

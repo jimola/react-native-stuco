@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, TouchableOpacity, ScrollView, Platform } from 'react-native';
 
 import { NavigationActions } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -27,7 +27,7 @@ export default class Login extends React.Component {
     return(
       <View style={styles.container}>
         <Text>
-          Login Page
+          {Platform.OS == 'ios' ? `Platform: iOS` : `Platform: Android`}
         </Text>
         <TouchableOpacity
           style={styles.goToHome}
