@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Header from '../components/header';
 import MyList from '../components/list';
 
+import * as firebase from 'firebase';
 
 export default class Home extends React.Component {
 
@@ -17,16 +18,22 @@ export default class Home extends React.Component {
   }
 
   fetchData(){
-    return fetch('https://api.myjson.com/bins/1crrbd')
-    .then((response) => response.json())
-    .then((responseJson) => {
-      this.setState({list: responseJson.list})
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+    var that = this;
+    var tempList = []
+    firebase.database().ref('users').once('value', (snap)=> {
+      snap.forEach(function(data) {
+        let result = data.val();
 
-  }
+        tempList.push(result);
+        //console.log(data.key,"reg reg init")
+      })
+    }).then(function(){
+      that.setState({list:tempList}, ()=>console.log(that.state.list))
+    })
+  };
+
+
+
 
   deleteItem(i){
     var newList = this.state.list
@@ -42,18 +49,26 @@ export default class Home extends React.Component {
     console.log(item);
     this.props.navigation.navigate('Details', {...item})
 
+
+    //Push to firebase
+    // firebase.database().ref(`users/${item.name}`).update({
+    //   data: item
+    // });
+
+
   }
 
   render() {
     return (
       <View style={styles.container}>
 
-        
+
 
         <Header navigation={this.props.navigation}/>
         <View style={styles.body}>
           <ScrollView style={styles.scroll}>
-            <MyList list={this.state.list}
+            <MyList
+              list={this.state.list}
               deleteItem={(i)=>this.deleteItem(i)}
               refreshList={()=>this.fetchData()}
               goToDetails={(item)=>this.goToDetails(item)}

@@ -22,12 +22,12 @@ export default class MyList extends React.Component {
           {
             this.props.list.map((item, i) => (
               <ListItem
-                title={item.name}
-                subtitle={item.job}
-                rightTitle={`Age: ${item.age}`}
-                leftIcon={{name:item.icon}}
+                title={item.data.name}
+                subtitle={item.data.job}
+                rightTitle={`Age: ${item.data.age}`}
+                leftIcon={{name:item.data.icon}}
                 rightIcon={{name:'delete'}}
-                onPress={()=> this.props.goToDetails(item)}
+                onPress={()=> this.props.goToDetails(item.data)}
                 onPressRightIcon={() => this.props.deleteItem(i)}
                 key={i}
               />

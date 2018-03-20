@@ -11,6 +11,18 @@ import Settings from './app/screens/Settings';
 import Details from './app/screens/Details';
 import Location from './app/screens/Location';
 import CustomMenu from './app/screens/CustomMenu';
+import * as firebase from 'firebase';
+
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyBFywbT7cacSLNAiszUq77s54SuuKzUE-o",
+  authDomain: "stuco1-f156a.firebaseapp.com",
+  databaseURL: "https://stuco1-f156a.firebaseio.com",
+  projectId: "stuco1-f156a",
+  storageBucket: "stuco1-f156a.appspot.com",
+  messagingSenderId: "106157953476"
+};
+firebase.initializeApp(config);
 
 export default class App extends React.Component {
   render() {
