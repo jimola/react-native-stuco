@@ -8,8 +8,6 @@ import Header from '../components/header';
 
 export default class Details extends React.Component {
 
-
-
   render() {
     const person = this.props.navigation.state.params;
     console.log(person);

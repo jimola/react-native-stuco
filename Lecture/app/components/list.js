@@ -16,6 +16,7 @@ export default class MyList extends React.Component {
   }
 
   render() {
+
     return (
       <View style={styles.container}>
         <List style={styles.list}>

@@ -20,7 +20,7 @@ export default class Location extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'cyan',
+    backgroundColor: 'green',
     alignItems: 'center',
     justifyContent: 'center',
   }

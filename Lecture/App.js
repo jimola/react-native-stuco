@@ -11,6 +11,7 @@ import Settings from './app/screens/Settings';
 import Details from './app/screens/Details';
 import Location from './app/screens/Location';
 import CustomMenu from './app/screens/CustomMenu';
+import AddContact from './app/screens/AddContact';
 import * as firebase from 'firebase';
 
 // Initialize Firebase
@@ -87,11 +88,6 @@ const styles = StyleSheet.create({
 
 });
 
-
-
-
-
-
 const HomeStack = StackNavigator({
   Home: {
     screen: Home
@@ -104,13 +100,21 @@ const HomeStack = StackNavigator({
   headerMode:'none'
 })
 
-
-
-
+const HomeStackOuter = StackNavigator({
+  Home: {
+    screen: HomeStack
+  },
+  AddContact: {
+    screen: AddContact
+  }
+}, {
+  headerMode: 'none',
+  mode: 'modal'
+});
 
 const AppNavigator = TabNavigator({
   home:{
-    screen: HomeStack,
+    screen: HomeStackOuter,
     navigationOptions:{
       tabBarIcon: <Icon name='dehaze' size={30} color='black'/>
     }
@@ -142,7 +146,6 @@ const AppNavigator = TabNavigator({
   swipeEnabled: true,
 
 })
-
 
 const AppDrawerNavigator = DrawerNavigator({
   AppNavigator: {

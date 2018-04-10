@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Header from '../components/header';
@@ -10,6 +10,7 @@ import * as firebase from 'firebase';
 export default class Home extends React.Component {
 
   state={
+    loading:true,
     list:[]
   }
 
@@ -17,10 +18,15 @@ export default class Home extends React.Component {
     this.fetchData()
   }
 
+  componentDidMount(){
+
+  }
+
   fetchData(){
     var that = this;
+    that.setState({loading:true})
     var tempList = []
-    firebase.database().ref('users').once('value', (snap)=> {
+    firebase.database().ref(`users/`).once('value', (snap)=> {
       snap.forEach(function(data) {
         let result = data.val();
 
@@ -28,9 +34,11 @@ export default class Home extends React.Component {
         //console.log(data.key,"reg reg init")
       })
     }).then(function(){
-      that.setState({list:tempList}, ()=>console.log(that.state.list))
+      that.setState({list:tempList}, ()=>that.setState({loading:false}))
     })
   };
+
+
 
 
 
@@ -66,14 +74,19 @@ export default class Home extends React.Component {
 
         <Header navigation={this.props.navigation}/>
         <View style={styles.body}>
-          <ScrollView style={styles.scroll}>
-            <MyList
-              list={this.state.list}
-              deleteItem={(i)=>this.deleteItem(i)}
-              refreshList={()=>this.fetchData()}
-              goToDetails={(item)=>this.goToDetails(item)}
+          {this.state.loading ?
+            <ActivityIndicator style={styles.loadIcon}
+              color='#f92222' size='large'
             />
-          </ScrollView>
+            :
+            <ScrollView style={styles.scroll}>
+              <MyList
+                list={this.state.list}
+                deleteItem={(i)=>this.deleteItem(i)}
+                refreshList={()=>this.fetchData()}
+                goToDetails={(item)=>this.goToDetails(item)}
+              />
+          </ScrollView>}
           <View style={styles.fetchContainer}>
             <TouchableOpacity
               style={styles.fetchButton}
@@ -123,5 +136,8 @@ const styles = StyleSheet.create({
   scroll:{
     flex:1,
     backgroundColor:'gray'
+  },
+  loadIcon:{
+    flex:1,
   }
 });
