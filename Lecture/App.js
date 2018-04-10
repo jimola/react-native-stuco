@@ -175,7 +175,7 @@ const AppDrawerNavigator = DrawerNavigator({
 }, {
     contentOptions: {
     activeTintColor: '#e91e63',
-    labelStyle: {fontFamily:'Helvetica Neue'}
+    //labelStyle: {fontFamily:'Helvetica Neue'}
   },
   drawerBackgroundColor:'red',
   contentComponent: CustomDrawerContentComponent

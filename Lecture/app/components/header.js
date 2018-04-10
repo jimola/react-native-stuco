@@ -13,46 +13,22 @@ export default class Header extends React.Component {
   //Take out this ButtonType function to make work again
 
   render() {
-    const ButtonType = function(){
-      if (this.props.title){
-        if (this.props.title == 'AddContact'){
-          console.log('+')
-          return (
-
-            <TouchableOpacity
-            onPress={() => this.props.navigation.dispatch(NavigationActions.back())}
-            >
-              <Icon name='close' size={30} color='white'/>
-            </TouchableOpacity>
-          )
-        } else {
-          console.log('arrow');
-          return(
-            <TouchableOpacity
-            onPress={() => this.props.navigation.dispatch(NavigationActions.back())}
-            >
-              <Icon name='arrow-back' size={30} color='white'/>
-            </TouchableOpacity>
-          )
-        }
-      } else {
-        console.log('menu');
-        return (
-
-          <TouchableOpacity
-          onPress={() => this.props.navigation.dispatch(NavigationActions.back())}
-          >
-            <Icon name='menu' size={30} color='white'/>
-          </TouchableOpacity>
-        )
-      }
-    }
 
     return (
       <View style={styles.container}>
         <View style={styles.horizContainer}>
-          {ButtonType}
-
+          {this.props.title ? <TouchableOpacity
+          onPress={() => this.props.navigation.dispatch(NavigationActions.back())}
+          >
+            <Icon name='arrow-back' size={30} color='white'/>
+          </TouchableOpacity>
+          :
+          <TouchableOpacity
+          onPress={() => this.props.navigation.navigate('DrawerOpen')}
+          >
+            <Icon name='menu' size={30} color='white'/>
+          </TouchableOpacity>
+          }
           <Text style={styles.title}>
             {this.props.title ? this.props.title : 'Home Title'}
           </Text>
@@ -77,7 +53,7 @@ const styles = StyleSheet.create({
     flex:1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent:'center',
+    justifyContent:'space-between',
     paddingHorizontal:8,
     paddingTop:15
   },
