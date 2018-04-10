@@ -10,11 +10,6 @@ import * as firebase from 'firebase';
 export default class Login extends React.Component {
 
   state = { email: '', password: '', error: '', loading: false };
-
-  
-
-
-
   goToHome(){
     // this.props.navigation.navigate('home')
     this.props.navigation.dispatch(NavigationActions.back())
@@ -32,8 +27,24 @@ export default class Login extends React.Component {
     }));
   }
 
+  onLoginPress(){
+    var email = this.state.email;
+    var password = this.state.password;
+    firebase.auth().signInWithEmailAndPassword(email, password).then(
+        () => {alert(firebase.auth().currentUser.uid)}).catch(function(error){
+      if(error.code == 'auth/invalid-email'){
+        firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error){
+          alert(error.message)
+        })
+      }else{
+        alert(error.message)
+      }
+    })
+  }
 
-
+  onLogoutPress(){
+    firebase.auth().signOut()
+  }
 
     render() {
       return (
